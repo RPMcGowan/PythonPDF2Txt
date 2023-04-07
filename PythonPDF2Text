@@ -1,0 +1,24 @@
+import PyPDF2
+
+# Open the PDF file in read mode
+with open('>>>>YOURPDFHERE<<<<', 'rb') as pdf_file:
+
+    # Create a PDF reader object
+    pdf_reader = PyPDF2.PdfReader(pdf_file)
+
+    # Get the number of pages in the PDF file
+    num_pages = len(pdf_reader.pages)
+
+    # Open a new text file for writing - stored where your .py file is
+    with open('PDFDUMP.txt', 'w') as text_file:
+
+        # Loop through all the pages and extract the text
+        for page_num in range(num_pages):
+            page = pdf_reader.pages[page_num]
+            text = page.extract_text()
+
+            # Write the extracted text to the text file
+            text_file.write(text)
+
+# Close the PDF file
+pdf_file.close()
